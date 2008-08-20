@@ -128,9 +128,21 @@ class Muuttaa extends Muuttaa_Common
             return true;
         }
 
+        $sql = 'INSERT INTO muuttaa_%s_statements
+                SET hosts = ?,
+                    statement = ?,
+                    retries = ?,
+                    status = ?,
+                    date_created = NOW()';
+
         foreach ($this->statements as $stmt) {
-            $sql = sprintf((string)$stmt, $this->name);
-            $this->execute($sql);
+            $query = sprintf($sql, $this->name);
+            $this->execute($query, array(
+                json_encode($stmt->getHosts()),
+                json_encode($stmt->getQueries()),
+                $stmt->getRetries(),
+                Muuttaa_Statement::STATUS_PENDING
+            ));
         }
 
         $this->statements = array();

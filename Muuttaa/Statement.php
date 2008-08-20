@@ -133,21 +133,36 @@ class Muuttaa_Statement
     }
 
     /**
-     * Convert the {@link Muuttaa_Statement} to a string
-     *
-     * @return string
-     * @see Muuttaa_Statement::$hosts, Muuttaa_Statement::$queries
+     * Get all hosts
+     * 
+     * @access public
+     * @return array The list of hosts for this statement
      */
-    public function __toString()
+    public function getHosts()
     {
-        $sql = "INSERT INTO muuttaa_%s_statements
-                SET hosts = '" . mysql_real_escape_string(json_encode($this->hosts)) . "',
-                    statement = '" . mysql_real_escape_string(json_encode($this->queries)) . "',
-                    retries = " . (int)$this->retries . ',
-                    status = ' . self::STATUS_PENDING . ',
-                    date_created = NOW()';
+        return $this->hosts;
+    }
 
-        return $sql;
+    /**
+     * Get all queries
+     * 
+     * @access public
+     * @return array The list of queries for this statement
+     */
+    public function getQueries()
+    {
+        return $this->queries;
+    }
+
+    /**
+     * Get number of retries
+     * 
+     * @access public
+     * @return integer Number of times to retry this statement
+     */
+    public function getRetries()
+    {
+        return (int)$this->retries;
     }
 }
 
