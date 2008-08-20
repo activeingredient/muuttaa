@@ -46,8 +46,11 @@ class Muuttaa_CLI
     public function getDefaults()
     {
         // The default values for config settings.
-        $defaults['names'] = array();
-        $defaults['dsn']   = array();
+        $defaults               = array();
+        $defaults['names']      = array();
+        $defaults['dsn']        = array();
+        $defaults['multiplier'] = 1.5;
+        return $defaults;
     }
 
     /**
