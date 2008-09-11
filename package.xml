@@ -9,7 +9,7 @@
                              http://pear.php.net/dtd/package-2.0
                              http://pear.php.net/dtd/package-2.0.xsd">
     <name>Muuttaa</name>
-    <channel>pear.php.net</channel>
+    <channel>pear.digg.internal</channel>
     <summary>A generic SQL nibbler for MySQL</summary>
     <description>Muuttaa is a specialized queue for processing thousands, potentially millioins, of UPDATE/DELETE/INSERT statements across multiple hosts. It's partitioned, self-pruning and minimalistic.</description>
     <lead>
