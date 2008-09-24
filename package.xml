@@ -18,10 +18,10 @@
         <email>joe@joestump.net</email>
         <active>yes</active>
     </lead>
-    <date>2008-08-18</date>
+    <date>2008-09-23</date>
     <version>
-        <release>0.0.1</release>
-        <api>0.0.1</api>
+        <release>0.0.2</release>
+        <api>0.0.2</api>
     </version>
     <stability>
         <release>alpha</release>
@@ -29,7 +29,7 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes>
-        Initial release.
+        Fixed dependency problem in package.xml.
     </notes>
     <contents>
         <dir name="/">
@@ -141,12 +141,127 @@
             </pearinstaller>
             <package>
                 <name>PDB</name>
-                <channel>pear.php.net</channel>
+                <channel>pear.digg.internal</channel>
                 <min>0.0.1</min>
             </package>
         </required>
     </dependencies>
     <phprelease/>
     <changelog>
+        <release>
+            <date>2008-08-18</date>
+            <version>
+                <release>0.0.1</release>
+                <api>0.0.1</api>
+            </version>
+            <stability>
+                <release>alpha</release>
+                <api>alpha</api>
+            </stability>
+            <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+            <notes>
+                Initial release.
+            </notes>
+            <contents>
+                <dir name="/">
+                    <file name="Muuttaa.php" role="php">
+                        <tasks:replace type="pear-config" from="@data_dir@" to="data_dir"/>
+                        <tasks:replace type="pear-config" from="@php_dir@" to="php_dir"/>
+                        <tasks:replace type="pear-config" from="@test_dir@" to="test_dir"/>
+                        <tasks:replace type="pear-config" from="@bin_dir@" to="bin_dir"/>
+                        <tasks:replace type="pear-config" from="@php_bin@" to="php_bin"/>
+                        <tasks:replace type="package-info" from="@package-name@" to="name"/>
+                        <tasks:replace type="package-info" from="@package-version@" to="version"/>
+                    </file>
+                    <dir name="Muuttaa">
+                        <file name="CLI.php" role="php">
+                            <tasks:replace type="pear-config" from="@data_dir@" to="data_dir"/>
+                            <tasks:replace type="pear-config" from="@php_dir@" to="php_dir"/>
+                            <tasks:replace type="pear-config" from="@test_dir@" to="test_dir"/>
+                            <tasks:replace type="pear-config" from="@bin_dir@" to="bin_dir"/>
+                            <tasks:replace type="pear-config" from="@php_bin@" to="php_bin"/>
+                            <tasks:replace type="package-info" from="@package-name@" to="name"/>
+                            <tasks:replace type="package-info" from="@package-version@" to="version"/>
+                        </file>
+                        <file name="Common.php" role="php">
+                            <tasks:replace type="pear-config" from="@data_dir@" to="data_dir"/>
+                            <tasks:replace type="pear-config" from="@php_dir@" to="php_dir"/>
+                            <tasks:replace type="pear-config" from="@test_dir@" to="test_dir"/>
+                            <tasks:replace type="pear-config" from="@bin_dir@" to="bin_dir"/>
+                            <tasks:replace type="pear-config" from="@php_bin@" to="php_bin"/>
+                            <tasks:replace type="package-info" from="@package-name@" to="name"/>
+                            <tasks:replace type="package-info" from="@package-version@" to="version"/>
+                        </file>
+                        <file name="Exception.php" role="php">
+                            <tasks:replace type="pear-config" from="@data_dir@" to="data_dir"/>
+                            <tasks:replace type="pear-config" from="@php_dir@" to="php_dir"/>
+                            <tasks:replace type="pear-config" from="@test_dir@" to="test_dir"/>
+                            <tasks:replace type="pear-config" from="@bin_dir@" to="bin_dir"/>
+                            <tasks:replace type="pear-config" from="@php_bin@" to="php_bin"/>
+                            <tasks:replace type="package-info" from="@package-name@" to="name"/>
+                            <tasks:replace type="package-info" from="@package-version@" to="version"/>
+                        </file>
+                        <file name="Process.php" role="php">
+                            <tasks:replace type="pear-config" from="@data_dir@" to="data_dir"/>
+                            <tasks:replace type="pear-config" from="@php_dir@" to="php_dir"/>
+                            <tasks:replace type="pear-config" from="@test_dir@" to="test_dir"/>
+                            <tasks:replace type="pear-config" from="@bin_dir@" to="bin_dir"/>
+                            <tasks:replace type="pear-config" from="@php_bin@" to="php_bin"/>
+                            <tasks:replace type="package-info" from="@package-name@" to="name"/>
+                            <tasks:replace type="package-info" from="@package-version@" to="version"/>
+                        </file>
+                        <file name="Statement.php" role="php">
+                            <tasks:replace type="pear-config" from="@data_dir@" to="data_dir"/>
+                            <tasks:replace type="pear-config" from="@php_dir@" to="php_dir"/>
+                            <tasks:replace type="pear-config" from="@test_dir@" to="test_dir"/>
+                            <tasks:replace type="pear-config" from="@bin_dir@" to="bin_dir"/>
+                            <tasks:replace type="pear-config" from="@php_bin@" to="php_bin"/>
+                            <tasks:replace type="package-info" from="@package-name@" to="name"/>
+                            <tasks:replace type="package-info" from="@package-version@" to="version"/>
+                        </file>
+                        <dir name="Exception">
+                            <file name="FailedLock.php" role="php">
+                                <tasks:replace type="pear-config" from="@data_dir@" to="data_dir"/>
+                                <tasks:replace type="pear-config" from="@php_dir@" to="php_dir"/>
+                                <tasks:replace type="pear-config" from="@test_dir@" to="test_dir"/>
+                                <tasks:replace type="pear-config" from="@bin_dir@" to="bin_dir"/>
+                                <tasks:replace type="pear-config" from="@php_bin@" to="php_bin"/>
+                                <tasks:replace type="package-info" from="@package-name@" to="name"/>
+                                <tasks:replace type="package-info" from="@package-version@" to="version"/>
+                            </file>
+                            <file name="FailedOnRetry.php" role="php">
+                                <tasks:replace type="pear-config" from="@data_dir@" to="data_dir"/>
+                                <tasks:replace type="pear-config" from="@php_dir@" to="php_dir"/>
+                                <tasks:replace type="pear-config" from="@test_dir@" to="test_dir"/>
+                                <tasks:replace type="pear-config" from="@bin_dir@" to="bin_dir"/>
+                                <tasks:replace type="pear-config" from="@php_bin@" to="php_bin"/>
+                                <tasks:replace type="package-info" from="@package-name@" to="name"/>
+                                <tasks:replace type="package-info" from="@package-version@" to="version"/>
+                            </file>
+                            <file name="FailedQuery.php" role="php">
+                                <tasks:replace type="pear-config" from="@data_dir@" to="data_dir"/>
+                                <tasks:replace type="pear-config" from="@php_dir@" to="php_dir"/>
+                                <tasks:replace type="pear-config" from="@test_dir@" to="test_dir"/>
+                                <tasks:replace type="pear-config" from="@bin_dir@" to="bin_dir"/>
+                                <tasks:replace type="pear-config" from="@php_bin@" to="php_bin"/>
+                                <tasks:replace type="package-info" from="@package-name@" to="name"/>
+                                <tasks:replace type="package-info" from="@package-version@" to="version"/>
+                            </file>
+                        </dir>
+                    </dir>
+                    <dir name="scripts">
+                        <file name="muuttaa" role="script" baseinstalldir="/" install-as="muuttaa">
+                            <tasks:replace type="pear-config" from="@data_dir@" to="data_dir"/>
+                            <tasks:replace type="pear-config" from="@php_dir@" to="php_dir"/>
+                            <tasks:replace type="pear-config" from="@test_dir@" to="test_dir"/>
+                            <tasks:replace type="pear-config" from="@bin_dir@" to="bin_dir"/>
+                            <tasks:replace type="pear-config" from="@php_bin@" to="php_bin"/>
+                            <tasks:replace type="package-info" from="@package-name@" to="name"/>
+                            <tasks:replace type="package-info" from="@package-version@" to="version"/>
+                        </file>
+                    </dir>
+                </dir>
+            </contents>
+        </release>
     </changelog>
 </package>
