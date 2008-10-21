@@ -18,9 +18,9 @@
         <email>joe@joestump.net</email>
         <active>yes</active>
     </lead>
-    <date>2008-09-23</date>
+    <date>2008-10-21</date>
     <version>
-        <release>0.0.2</release>
+        <release>0.0.3</release>
         <api>0.0.2</api>
     </version>
     <stability>
@@ -29,7 +29,7 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes>
-        Fixed dependency problem in package.xml.
+        * Move to pear.php.net, depend on pear.php.net/PDB. (ieure)
     </notes>
     <contents>
         <dir name="/">
@@ -141,7 +141,7 @@
             </pearinstaller>
             <package>
                 <name>PDB</name>
-                <channel>pear.digg.internal</channel>
+                <channel>pear.php.net</channel>
                 <min>0.0.1</min>
             </package>
         </required>
