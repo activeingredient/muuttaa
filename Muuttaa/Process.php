@@ -114,11 +114,10 @@ class Muuttaa_Process extends Muuttaa_Common
                 FROM ' . $this->getTable() . '
                 WHERE status = ?
                 ORDER BY date_created DESC
-                LIMIT 0,?';
+                LIMIT 0,' . (int) $limit;
 
         $result = $this->db()->getAll($sql, array(
-            Muuttaa_Statement::STATUS_PENDING, (int)$limit
-        ));
+            Muuttaa_Statement::STATUS_PENDING));
 
         foreach ($result as $stmt) {
             try {
