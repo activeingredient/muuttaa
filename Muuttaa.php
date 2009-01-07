@@ -13,7 +13,7 @@
  *
  * @package   Muuttaa
  * @author    Joe Stump <joe@joestump.net>
- * @copyright 2008 Digg.com, Inc. 
+ * @copyright 2008, 2009 Digg.com, Inc. 
  * @license   http://tinyurl.com/42zef New BSD License
  * @version   SVN: @package_version@
  * @link      http://code.google.com/p/muuttaa
@@ -120,7 +120,7 @@ class Muuttaa extends Muuttaa_Common
      *
      * @access public
      * @throws {@link Muuttaa_Exception} on query error
-     * @return boolean
+     * @return array Array of (STATEMENT_ID => STATEMENT)
      */
     public function commit()
     {
@@ -135,18 +135,26 @@ class Muuttaa extends Muuttaa_Common
                     status = ?,
                     date_created = NOW()';
 
-        foreach ($this->statements as $stmt) {
-            $query = sprintf($sql, $this->name);
-            $this->execute($query, array(
-                json_encode($stmt->getHosts()),
-                json_encode($stmt->getQueries()),
-                $stmt->getRetries(),
-                Muuttaa_Statement::STATUS_PENDING
-            ));
+        $db = $this->db();
+        $db->beginTransaction();
+        $out = array();
+        try {
+            $sth = $db->prepare(sprintf($sql, $this->name));
+            foreach ($this->statements as $stmt) {
+                $res = $sth->execute(array(json_encode($stmt->getHosts()),
+                                           json_encode($stmt->getQueries()),
+                                           $stmt->getRetries(),
+                                           Muuttaa_Statement::STATUS_PENDING));
+                $out[$db->lastInsertId()] = $stmt;
+            }
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollBack();
+            throw $e;
         }
 
         $this->statements = array();
-        return true;
+        return $out;
     }
 }
 

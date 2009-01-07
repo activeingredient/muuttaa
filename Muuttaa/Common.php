@@ -13,7 +13,7 @@
  *
  * @package   Muuttaa
  * @author    Joe Stump <joe@joestump.net>
- * @copyright 2008 Digg.com, Inc. 
+ * @copyright 2008, 2009 Digg.com, Inc. 
  * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
  * @version   SVN: @package_version@
  * @link      http://code.google.com/p/muuttaa
@@ -186,6 +186,79 @@ abstract class Muuttaa_Common
     protected function getTable($table = 'statements')
     {
         return sprintf('muuttaa_%s_%s', $this->name, $table);
+    }
+
+    /**
+     * Get the contents of the queue
+     *
+     * @param int $offset Offset to start fetching statements from
+     * @param int $limit  Max. number of statements to fetch
+     * @param int $status If not null, return statements in this
+     *                    status. If null, return statements regardless
+     *                    of status.
+     *
+     * @return array Queue contents
+     *
+     * @see {@link Muuttaa_Statement::STATUS_PENDING}
+     * @see {@link Muuttaa_Statement::STATUS_COMPLETE}
+     * @see {@link Muuttaa_Statement::STATUS_FAILED}
+     * @see {@link Muuttaa_Statement::STATUS_EXCEPTION}
+     */
+    public function getQueue($offset = 0, $limit = 50, $status = null)
+    {
+        $sql  = sprintf("SELECT * FROM `%s` ", $this->getTable());
+        $args = array();
+        if ($status !== null) {
+            $sql   .= "WHERE `status` = ? ";
+            $args[] = $status;
+        }
+
+        $sql .= sprintf("ORDER BY `date_created` DESC LIMIT %d, %d;",
+                        $offset, $limit);
+        $res = $this->db()->query($sql, $args);
+        $out = array();
+        while ($row = $res->fetchObject()) {
+            $out[$row->id] = $row;
+        }
+        return $out;
+    }
+
+    /**
+     * Get queue size
+     *
+     * @return int Queue size
+     */
+    public function getQueueSize()
+    {
+        static $stmt;
+        if (!isset($stmt)) {
+            $sql  = "SELECT COUNT(*) FROM `%s`;";
+            $stmt = $this->db()->prepare(sprintf($sql, $this->getTable()));
+        }
+        $stmt->execute();
+        $col = $stmt->fetchColumn(0);
+        return $col[0];
+    }
+
+    /**
+     * Get queue status
+     *
+     * @return array Array of PDO status => number of statements
+     */
+    public function getQueueStats()
+    {
+        static $stmt;
+        if (!isset($stmt)) {
+            $sql = "SELECT `status`, COUNT(*) as `num` FROM `%s` " .
+                "GROUP BY `status`;";
+            $stmt = $this->db()->prepare(sprintf($sql, $this->getTable()));
+        }
+        $stmt->execute();
+        $out = array();
+        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $out[$row->status] = $row->num;
+        }
+        return $out;
     }
 
     /**

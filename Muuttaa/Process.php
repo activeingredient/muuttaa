@@ -13,7 +13,7 @@
  *
  * @package   Muuttaa
  * @author    Joe Stump <joe@joestump.net>
- * @copyright 2008 Digg.com, Inc. 
+ * @copyright 2008, 2009 Digg.com, Inc. 
  * @license   http://tinyurl.com/42zef New BSD License
  * @version   SVN: @package_version@
  * @link      http://code.google.com/p/muuttaa
@@ -110,15 +110,7 @@ class Muuttaa_Process extends Muuttaa_Common
 
         $this->lock();
 
-        $sql = 'SELECT *
-                FROM ' . $this->getTable() . '
-                WHERE status = ?
-                ORDER BY date_created DESC
-                LIMIT 0,' . (int) $limit;
-
-        $result = $this->db()->getAll($sql, array(
-            Muuttaa_Statement::STATUS_PENDING));
-
+        $result = $this->getQueue(0, $limit, Muuttaa_Statement::STATUS_PENDING);
         foreach ($result as $stmt) {
             try {
                 $a = microtime(true);
