@@ -18,9 +18,9 @@
         <email>joe@joestump.net</email>
         <active>yes</active>
     </lead>
-    <date>2008-10-21</date>
+    <date>2009-01-07</date>
     <version>
-        <release>0.0.3</release>
+        <release>0.0.4</release>
         <api>0.0.2</api>
     </version>
     <stability>
@@ -29,7 +29,12 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes>
-        * Move to pear.php.net, depend on pear.php.net/PDB. (ieure)
+        - Add getQueue(), getQueueSize(), getQueueStats() to Muuttaa_Common.
+        - Use getQueue() in Muuttaa_Process::process() instead of using raw SQL.
+        - Refactor Muuttaa::commit():
+          - Wrap the whole commit in a transaction.
+          - Use a prepared statement.
+          - Return an array of ID =&gt; STATEMENT instead of boolean true.
     </notes>
     <contents>
         <dir name="/">
