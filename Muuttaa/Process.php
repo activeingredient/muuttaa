@@ -191,7 +191,7 @@ class Muuttaa_Process extends Muuttaa_Common
                 ORDER BY date_created DESC
                 LIMIT 1000';
 
-        $errors = $this->db->getCol($sql, 0, array(
+        $errors = $this->db()->getCol($sql, 0, array(
             Muuttaa_Statement::STATUS_FAILED,
             Muuttaa_Statement::STATUS_EXCEPTION
         ));
