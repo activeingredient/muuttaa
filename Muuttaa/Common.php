@@ -254,13 +254,29 @@ abstract class Muuttaa_Common
             $stmt = $this->db()->prepare(sprintf($sql, $this->getTable()));
         }
         $stmt->execute();
-        $out = array();
+        $out = array(Muuttaa_Statement::STATUS_PENDING   => 0,
+                     Muuttaa_Statement::STATUS_COMPLETE  => 0,
+                     Muuttaa_Statement::STATUS_FAILED    => 0,
+                     Muuttaa_Statement::STATUS_EXCEPTION => 0);
         while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
             $out[$row->status] = $row->num;
         }
         return $out;
     }
-
+    
+    /**
+     * Destroy a queue
+     *
+     * @return void
+     */
+    public function destroy()
+    {
+        $tables = array($this->getTable(), $this->getTable('errors'));
+        foreach ($tables as $table) {
+            $this->db()->query("DROP TABLE `%s`;", array($table));
+        }
+    }
+    
     /**
      * Close all of the DB connections
      *

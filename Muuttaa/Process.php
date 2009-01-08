@@ -156,8 +156,7 @@ class Muuttaa_Process extends Muuttaa_Common
             }
         }
 
-        // Queue up a Muuttaa statement that will, in fact, prune the oldest
-        // 1000 successful statements from the queue. How meta meta of us!
+        // Prune the oldest 1000 successful statements from the queue.
         $sql = 'SELECT MIN(id)
                 FROM ' . $this->getTable() . '
                 WHERE status = ?';
@@ -166,18 +165,13 @@ class Muuttaa_Process extends Muuttaa_Common
             Muuttaa_Statement::STATUS_COMPLETE
         ));
 
-        $queue = new Muuttaa($this->name, $this->queue);
         if ((int)$min > 0) {
             $sql = 'DELETE FROM ' . $this->getTable() . ' 
                     WHERE id >= ' . $min .' AND
                           id <= ' . ($min + 1000) . ' AND
                           status = ' . Muuttaa_Statement::STATUS_COMPLETE;
 
-            $stmt = new Muuttaa_Statement();
-            $stmt->addQuery($sql);
-            $stmt->addHost($this->queue);
-            $queue->addStatement($stmt);
-            $queue->commit();
+            $this->db()->query($sql);
         }
 
         // Nuke all errors that are older than 30 days. If you haven't fixed
@@ -197,16 +191,12 @@ class Muuttaa_Process extends Muuttaa_Common
         ));
 
         foreach ($errors as $err) {
-            $stmt = new Muuttaa_Statement();
-            $stmt->addQuery('DELETE 
-                             FROM ' . $this->getTable() . '
-                             WHERE id = ' . (int)$err);
-            $stmt->addQuery('DELETE 
-                             FROM ' . $this->getTable('errors') . '
-                             WHERE id = ' . (int)$err);
-            $stmt->addHost($this->queue);
-            $queue->addStatement($stmt);
-            $queue->commit();
+            $this->db()->query('DELETE 
+                                  FROM ' . $this->getTable() . '
+                                 WHERE id = ' . (int)$err);
+            $this->db()->query('DELETE 
+                                  FROM ' . $this->getTable('errors') . '
+                                 WHERE statementid = ' . (int)$err);
         }
 
         $this->unlock();
