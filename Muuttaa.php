@@ -19,6 +19,7 @@
  * @link      http://code.google.com/p/muuttaa
  */
 
+require_once 'Muuttaa/Common.php';
 require_once 'Muuttaa/Statement.php';
 
 /**
