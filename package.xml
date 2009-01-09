@@ -18,9 +18,9 @@
         <email>joe@joestump.net</email>
         <active>yes</active>
     </lead>
-    <date>2009-01-08</date>
+    <date>2009-01-09</date>
     <version>
-        <release>0.0.5</release>
+        <release>0.0.6</release>
         <api>0.0.2</api>
     </version>
     <stability>
@@ -29,11 +29,7 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes>
-        - Use `$this->db()`, rather than `$this->db`, fixes issue #3. (ieure)
-        - Move the queue pruning out-of-band, otherwise the queue will never reach empty. (ieure)
-        - Fix a SQL error in the prune, the `WHERE` for the `errors` table was using `id`, rather than `statementid`. (ieure)
-        - Prime the output of `getQueueStats()` so there's always a key for each status, negating the need to messy `isset()` tests. (ieure)
-        - Add `Muuttaa_Common::destroy()` to nuke a whole queue. (ieure)
+        - Fix query in `Muuttaa_Common::destroy()`. (ieure)
     </notes>
     <contents>
         <dir name="/">
