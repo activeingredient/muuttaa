@@ -263,7 +263,7 @@ abstract class Muuttaa_Common
         }
         return $out;
     }
-    
+
     /**
      * Destroy a queue
      *
@@ -273,10 +273,10 @@ abstract class Muuttaa_Common
     {
         $tables = array($this->getTable(), $this->getTable('errors'));
         foreach ($tables as $table) {
-            $this->db()->query("DROP TABLE `%s`;", array($table));
+            $this->db()->query(sprintf("DROP TABLE `%s`;", $table));
         }
     }
-    
+
     /**
      * Close all of the DB connections
      *
