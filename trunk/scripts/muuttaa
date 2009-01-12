@@ -1,0 +1,31 @@
+#!@php_bin@
+<?php
+
+/**
+ * Muuttaa is a generic SQL migration tool
+ *
+ * PHP version 5.2+
+ *
+ * @package   Muuttaa
+ * @author    Joe Stump <joe@joestump.net>
+ * @copyright 2008 Digg.com, Inc.
+ * @license   http://www.opensource.org/licenses/bsd-license.php New BSD License
+ * @version   SVN: @package_version@
+ * @link      http://code.google.com/p/muuttaa
+ * @see       Muuttaa_CLI, Muuttaa
+ */
+
+error_reporting(E_ALL | E_STRICT);
+
+if (is_file(dirname(__FILE__) . '/../Muuttaa/CLI.php') === true) {
+    $path = get_include_path();
+    $path = realpath(dirname(__FILE__) . '/..') . PATH_SEPARATOR . $path;
+    set_include_path($path);
+} 
+
+require_once 'Muuttaa/CLI.php';
+
+$cli = new Muuttaa_CLI();
+$cli->process();
+
+?>
