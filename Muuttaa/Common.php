@@ -273,7 +273,7 @@ abstract class Muuttaa_Common
     {
         $tables = array($this->getTable(), $this->getTable('errors'));
         foreach ($tables as $table) {
-            $this->db()->query(sprintf("DROP TABLE `%s`;", $table));
+            $this->db()->query(sprintf("DROP TABLE IF EXISTS `?`;", $table));
         }
     }
 
