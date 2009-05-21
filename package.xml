@@ -18,9 +18,9 @@
         <email>joe@joestump.net</email>
         <active>yes</active>
     </lead>
-    <date>2009-03-30</date>
+    <date>2009-05-21</date>
     <version>
-        <release>0.0.9</release>
+        <release>0.0.10</release>
         <api>0.0.2</api>
     </version>
     <stability>
@@ -29,7 +29,7 @@
     </stability>
     <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
     <notes>
-        - Really fix `Muuttaa_Common::destroy()`. (ieure)
+        - Explicitly require every class we reference. (ieure)
     </notes>
     <contents>
         <dir name="/">
