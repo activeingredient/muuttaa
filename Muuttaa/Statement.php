@@ -20,6 +20,7 @@
  */
 
 require_once 'Muuttaa.php';
+require_once 'Muuttaa/Exception.php';
 
 /** 
  * Muuttaa statement class 

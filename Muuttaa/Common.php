@@ -20,6 +20,7 @@
  */
 
 require_once 'PDB.php';
+require_once 'Muuttaa/Statement.php';
 require_once 'Muuttaa/Exception.php';
 
 /**

@@ -21,6 +21,7 @@
 
 require_once 'Muuttaa/Common.php';
 require_once 'Muuttaa/Statement.php';
+require_once 'Muuttaa/Exception.php';
 
 /**
  * The main Muuttaa class for queueing up MySQL queries
