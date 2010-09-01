@@ -95,7 +95,7 @@ class Muuttaa_Statement
         $cnt = count($this->hosts);
         $res = array_push($this->hosts, $host);
         if ($res != ($cnt + 1)) {
-            throw new Muuttaa_Exceptoin('Could not append host');
+            throw new Muuttaa_Exception('Could not append host');
         }
 
         return true;
@@ -115,7 +115,7 @@ class Muuttaa_Statement
         $cnt = count($this->queries);
         $res = array_push($this->queries, $query);
         if ($res != ($cnt + 1)) {
-            throw new Muuttaa_Exceptoin('Could not append statement');
+            throw new Muuttaa_Exception('Could not append statement');
         }
 
         return true;
